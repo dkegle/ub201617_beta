@@ -8,10 +8,9 @@ genes = ["VP24", "NP", "VP35", "VP40", "VP30", "GP", "L"]
 path = "xdata\chD_viruses_\data\genome\\"
 
 def printGeneNamesAndSizes(seqobj):
-   for feature in seqobj.features:
-      if feature.type == "gene":
-         print(feature.qualifiers['gene'][0] + " from " + \
-            str(feature.location.start) + " to "  + str(feature.location.end))
+   for feat in seqobj.features:
+      if feat.type == "gene":
+         print(" ".join([feat.qualifiers['gene'][0], "from", str(feat.location.start), "to", str(feat.location.end)]))
 
 def getGene(seqobj, gene_name):
    for feature in seqobj.features:
@@ -44,27 +43,26 @@ def getDistance(sample_1, sample_2, _genes):
       gene_1 = getGene(sample_1["seqobj"], gene)
       gene_2 = getGene(sample_2["seqobj"], gene)
       dist += editDistance(gene_1, gene_2)
-   return sample_1["id"] + " " + sample_2["id"] + " " + str(dist)
+   return " ".join([sample_1["id"], sample_2["id"], str(dist)])
 
 if __name__ == "__main__":
-   samples = [{"seqobj": SeqIO.read(path + sample, "genbank"), "id": sample.rstrip(".gb")} for sample in listdir(path)][0:2]
+   samples = [{"seqobj": SeqIO.read(path + sample, "genbank"), "id": sample.rstrip(".gb")} for sample in listdir(path)]
 
    # testing
    #prvi = SeqIO.read(path + "436409269.gb", "genbank")
    #drugi = SeqIO.read(path + "824038961.gb", "genbank")
    #samples = [{"seqobj": prvi, "id": "436409269"}, {"seqobj": drugi, "id": "824038961"}]
 
-   gene_subset = [genes[0]]   # only one gene (VP24) atm
-   distances = open("distance_matrix.txt", "w")
-   distances.write("# Columns are as follows: sample_1 sample_2 distance")
-   
-   process_pool = Pool(processes = 6)
+   gene_subset = [genes[2]]   # only one gene atm
+   out = open("distance_matrix.txt", "w")
+   out.write("# Columns are as follows: sample_1 sample_2 distance")
+   process_pool = Pool(processes = 8)
    results = [process_pool.apply_async(getDistance, args=(sample_1, sample_2, gene_subset)) 
          for (sample_1, sample_2) in combinations(samples, 2)]
    
-   for r in results:
-      distances.write("\n" + r.get())
-   distances.close()
+   for result in results:
+      out.write("\n" + result.get())
+   out.close()
 
    # testing
    #printGeneNamesAndSizes(prvi)
