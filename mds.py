@@ -53,11 +53,6 @@ class Mds:
                            dissimilarity="precomputed", n_jobs=1)
         # self.pos = clf.fit(self.distances).embedding_
 
-        # nmds = manifold.MDS(n_components=2, metric=False, max_iter=3000, eps=1e-12,
-        #                     dissimilarity="precomputed", random_state=seed, n_jobs=1,
-        #                     n_init=1)
-        # npos = nmds.fit_transform(similarities, init=pos)
-
         # Rescale the data
         # pos *= numpy.sqrt((X_true ** 2).sum()) / numpy.sqrt((pos ** 2).sum())
         # npos *= np.sqrt((X_true ** 2).sum()) / np.sqrt((npos ** 2).sum())
@@ -101,12 +96,7 @@ for label, pos in zip(mds.strains, mds.pos):
 for key in plotData:
     print(plotData[key])
     plt.scatter(plotData[key][0], plotData[key][1], color=label_colors[key], s=120, lw=0, label=key, alpha=0.7)
-    # plt.annotate(
-    #     label,
-    #     xy = (x, y), xytext = (-5, -5),
-    #     textcoords = 'offset points', ha = 'right', va = 'bottom')
 
-# plt.scatter(npos[:, 0], npos[:, 1], color='darkorange', s=s, lw=0, label='NMDS')
 plt.legend(scatterpoints=1, loc='upper left', shadow=False, prop={'size':8})
 
 mds.distances = mds.distances.max() / mds.distances * 100
