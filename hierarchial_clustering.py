@@ -83,6 +83,9 @@ class HierarchicalClustering:
 hc = HierarchicalClustering()
 hc.do_clustering()
 
+dendrogram(hc.Z)
+
+
 countries = {}
 for filename in glob.glob('data/genome/*.gb'):
     with open(filename, 'r') as f:
@@ -106,3 +109,4 @@ for lbl in ylbls:
             lbl.set_color(label_colors[key])
 
 plt.show()
+
