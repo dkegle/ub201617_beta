@@ -1,7 +1,5 @@
 # Evolucija virusov
-Bioinformatics seminar
-
-Group ub201617_beta
+Skupina ub201617_beta
 
 # Uvod
 
@@ -43,8 +41,6 @@ da so ti virusi v Gvinejo in Liberijo prišli iz Sierre Leone.
 Zanimivo je tudi, da virusi iz Demokratične republike Kongo niso podobni nobenemu virusu iz sosednjih držav.
 
 ## MDS
-
-//https://en.wikipedia.org/wiki/Multidimensional_scaling
 
 Poleg dendrograma, smo za vizualizacijo izračunanih razdalj uporabili tudi MDS (Večrazsežnostno lestvičenje).
 MDS podatke o podobnosti/različnosti preslika v razdalje med točkami v geometričnem prostoru. Da je vizualizacija kar se
