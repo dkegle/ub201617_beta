@@ -12,9 +12,9 @@ je bilo potrebno poročati o zanimivih ugotovitvah. Enega od teh algoritmov je b
 
 ## Izračun matrike razdalje urejanja (edit distance)
 
-Na začetku identificiramo gene in njihove velikosti. Ugotovimo da virus Ebole vsebuje 7 genov, 4 so krajši (VP24, VP30, VP35 in VP40), 2 srednje velika (GP in NP) ter en dolg gen (L). Krajši štirje so dolgi približno 1500 bp, srednji približno 2500 do 3000 bp in najdalši približno 7000 bp. 
+Na začetku identificiramo gene in njihove velikosti. Ugotovimo da virus Ebole vsebuje 7 genov, 4 geni so krajši (VP24, VP30, VP35 in VP40), 2 srednje velika (GP in NP) ter eden dolg gen (L). Krajši štirje so dolgi približno 1500 bp, srednji približno 2500 do 3000 bp in najdalši približno 7000 bp. 
 
-Nato naključno izberemo 2 vzorca in na vsakem genu z uporabo dinamičenga programiranja opravimo globalno poravnano (global alignment). Ker nas zanima samo razdelja urejanje (edit distance), ne potrebujemo traceback-a. Ugotovili smo da za izračun enega para genov potrebujemo nekaj minut. Izračuna za najdelši gen nismo mogli izvesti na računalniku s 8GB spomina.
+Nato naključno izberemo 2 vzorca in na vsakem genu z uporabo dinamičenga programiranja opravimo globalno poravnano (global alignment). Ker nas zanima samo razdelja urejanja (edit distance), ne potrebujemo traceback-a. Ugotovili smo da za izračun enega para genov potrebujemo nekaj minut. Izračuna za najdelši gen nismo mogli izvesti na računalniku s 8GB spomina.
 
 Ignorirali smo gen L zaradi omejitve spomina. Za pohitritev izračunov smo uporabili multiprocesiranje. Za izračun celotne matrike je bilo potrebno približno 20 ur. 
 
@@ -67,13 +67,13 @@ gruč - verjetno tudi zaradi geografske oddaljenosti.
 ## Neighbour joining
 
 Neighbour joining je metoda gručenja za izgradnjo genetskih dreves. Metodo sta ustvarila Naruya Saitou in Masatoshi Nei leta 1987.
-Običajno se metoda uporablja na drevesih, ki temeljijo na DNA ali proteinskih podatkih. Metoda zahteva razdalje med pari, da lahko zgradimo drevo.
+Običajno se metoda uporablja na drevesih, ki temeljijo na DNA ali proteinskih podatkih. Metoda zahteva razdalje med pari s katerimi lahko zgradimo drevo.
 Končno drevo nam prikaže kateri pari so si med seboj najbolj dobobni. 
 
 ![](neighbour_joining.png)
 
-Na zgornjem drevesu vidimo, da so primerki iz enaki držav praviloma blizu med seboj. Naprimer vsi trije primerki iz Gabona so si med seboj zelo blizu.
-Enako velja tudi za oba iz Nigerije. Iz Dokratične republike Congo so 4je primerki zelo skupaj in so si med seboj podobni s primerki iz Gabona, eden pa malo izstopa
+Na zgornjem drevesu vidimo, da so primerki iz enakih držav praviloma blizu med seboj. Naprimer vsi trije primerki iz Gabona so si med seboj zelo blizu.
+Enako velja tudi za oba iz Nigerije. Iz Demokratične republike Congo so 4je primerki zelo skupaj in so si med seboj podobni s primerki iz Gabona, eden pa malo izstopa
 in je na grafu daleč stran. Najbolj razpršeni so primerki iz Liberije in Sierre Leone, kar je po svoje razumljivo, saj jih je največ.
 
 
