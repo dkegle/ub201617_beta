@@ -1,0 +1,25 @@
+MDS
+
+//https://en.wikipedia.org/wiki/Multidimensional_scaling
+
+Poleg dendrograma, smo za vizualizacijo izračunanih razdalj uporabili tudi MDS (Večrazsežnostno lestvičenje).
+MDS podatke o podobnosti/različnosti preslika v razdalje med točkami v geometričnem prostoru. Da je vizualizacija kar se
+da jasna, smo razdalje med genomi preslikali v 2-dimenzionalni prostor. Pozicije (koordinate) genomov smo izračunali z
+uporabo funkcije mainfold.MDS iz knjižnjice scikit-learn. Začetne pozicije točk smo izbrali naključno, nato pa razdalje
+med njimi optimizirali z metričnim MDS.
+
+//Metric multidimensional scaling na wiki
+
+Dobljene točke smo prikazali na scatterplotu (razsevni diagram) in jih obarvali glede na državo pojavitve.
+Barve smo izbrali tako, da so države, ki so si geografsko blizu, podobno obarvane.
+Opazimo tesno gručo genomov iz Gabona in Demokratične republike Kongo ter v bližini tudi skupino zelo podobnih genomov
+iz Sierre Leone, v bližini katere se nahajajo tudi vzorci iz bližnjih Liberie in Gvineje.
+Opazno različna od vseh prej omenjenih skupin pa je gruča genomov, pretežno iz Gvineje, ki je obarvana rdeče in izrisana
+na povsem drugi strani diagrama.
+Med obravnavanimi genomi je tudi nekaj vzorcev iz Nigerije, ki pa glede na MDS ne spadajo v nobeno od identificiranih
+gruč - verjetno tudi zaradi geografske oddaljenosti.
+
+//nekam vmes nalimaj plot(e)
+
+
+

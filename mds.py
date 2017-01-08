@@ -8,6 +8,7 @@ from matplotlib.collections import LineCollection
 
 from sklearn import manifold
 from sklearn.decomposition import PCA
+from sklearn import preprocessing
 
 class Mds:
     gene_distances = {}
@@ -44,27 +45,27 @@ class Mds:
         for x, y in itertools.permutations(range(len(self.strains)), 2):
             self.distances.ix[x, y] = strain_distances(self.strains[x], self.strains[y])
 
+    def normalize_data(self):
+        self.distances = ( self.distances- self.distances.mean()) / (self.distances.max() - self.distances.min())
+
     def do_mds(self):
         self.calculate_distances()
+
+        #min_max_scaler = preprocessing.MinMaxScaler()
+
         self.distances.fillna(0, inplace=True)
+        #normalized = min_max_scaler.fit_transform(self.distances)
+        #self.distances = pandas.DataFrame(normalized)
 
-        seed = numpy.random.RandomState(seed=3)
-        clf = manifold.MDS(n_components=2, max_iter=3000, eps=1e-6, random_state=seed,
-                           dissimilarity="precomputed", n_jobs=1)
-        # self.pos = clf.fit(self.distances).embedding_
 
-        # Rescale the data
-        # pos *= numpy.sqrt((X_true ** 2).sum()) / numpy.sqrt((pos ** 2).sum())
-        # npos *= np.sqrt((X_true ** 2).sum()) / np.sqrt((npos ** 2).sum())
+        print(self.distances)
+        clf = manifold.MDS(n_components=2, max_iter=3000, eps=1e-6, dissimilarity="precomputed", n_jobs=1)
+        self.pos = clf.fit(self.distances).embedding_
 
         # Rotate the data
-        clf = PCA(n_components=2)
-        # X_true = clf.fit_transform(X_true)
+        # clf = PCA(n_components=2)
 
-        self.pos = clf.fit_transform(self.distances)
-
-        # npos = clf.fit_transform(npos)
-
+        # self.pos = clf.fit_transform(self.distances)
 
 mds = Mds()
 mds.do_mds()
@@ -77,8 +78,8 @@ for filename in glob.glob('data/genome/*.gb'):
 
 countrys = [countries[str(mds.strains[x])] for x in range(len(mds.strains))]
 
-label_colors = {'Guinea': 'r', 'Sierra Leone': 'y',
-                'Gabon': 'c', 'Liberia': 'm', 'Democratic Republic of the Congo':'b',
+label_colors = {'Guinea': 'r', 'Sierra Leone': 'gold',
+                'Gabon': 'c', 'Liberia': 'orange', 'Democratic Republic of the Congo':'b',
                 'Nigeria':'g'}
 # plt.scatter(X_true[:, 0], X_true[:, 1], color='navy', s=s, lw=0,
 #             label='True Position')
@@ -99,21 +100,7 @@ for key in plotData:
 
 plt.legend(scatterpoints=1, loc='upper left', shadow=False, prop={'size':8})
 
-mds.distances = mds.distances.max() / mds.distances * 100
-mds.distances[numpy.isinf(mds.distances)] = 0
 
-# Plot the edges
-start_idx, end_idx = numpy.where(mds.pos)
-# a sequence of (*line0*, *line1*, *line2*), where::
-#            linen = (x0, y0), (x1, y1), ... (xm, ym)
-# segments = [[X_true[i, :], X_true[j, :]]
-#             for i in range(len(pos)) for j in range(len(pos))]
-# values = np.abs(similarities)
-# lc = LineCollection(segments,
-#                     zorder=0, cmap=plt.cm.Blues,
-#                     norm=plt.Normalize(0, values.max()))
-# lc.set_array(similarities.flatten())
-# lc.set_linewidths(0.5 * np.ones(len(segments)))
-# ax.add_collection(lc)
+
 
 plt.show()
