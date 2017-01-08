@@ -1,0 +1,14 @@
+Za ocenjevanje podobnosti med različnimi genomi virusa ebole smo uporabili hierarhično gručenje.
+Pri tem smo razdaljo med dvema genomoma definirali kot vsoto ocen poravnav (alignment score) med
+5 geni iz vsakega genoma, za katere smo izračunali oceno poravnave.
+Pri računanju razdalje med gručami pa smo uporabili povprečno razdaljo, tj. razdalja med dvema gručama je
+povprečje razdalj med pari primerkov iz obeh gruč.
+
+Postopek hierarhičnega gručenja smo sprogramirali sami, za izris dendrograma pa uporabili funkcijo iz
+paketa scipy.
+[slika dendrogram]
+Na dendrogramu za vsak genom označimo državo, v kateri se je pojavil. Tako vidimo, da so v zgornji (redeči) skupini virusi opazno različni od
+ostalih, pojavljajo pa se predvsem v Gvineji.
+Opazimo še skupino zelo podobnih virusov, ki se pojavljajo predvsem v Sierri Leone, pa tudi v Gvineji in Liberiji. Sklepamo,
+da so ti virusi v Gvinejo in Liberijo prišli iz Sierre Leone.
+Zanimivo je tudi, da virusi iz Demokratične republike Kongo niso podobni nobenemu virusu iz sosednjih držav.

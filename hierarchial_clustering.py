@@ -3,6 +3,8 @@ import itertools
 
 import numpy
 import pandas
+import re
+import matplotlib.pyplot as plt
 from scipy.cluster.hierarchy import dendrogram
 
 
@@ -80,4 +82,31 @@ class HierarchicalClustering:
 
 hc = HierarchicalClustering()
 hc.do_clustering()
+
 dendrogram(hc.Z)
+
+
+countries = {}
+for filename in glob.glob('data/genome/*.gb'):
+    with open(filename, 'r') as f:
+        country = re.search(r'/country="([a-zA-Z ,:]+)"', f.read()).group(1)
+        countries[filename[12:-3]] = country
+
+labels = [countries[str(hc.strains[x])] for x in range(len(hc.strains))]
+
+plt.clf()
+dendrogram(hc.Z, orientation='right', labels=labels)
+
+label_colors = {'Guinea': 'r', 'Sierra Leone': 'k',
+                'Gabon': 'b', 'Liberia': 'm', 'Democratic':'g'}
+
+ax = plt.gca()
+ylbls = ax.get_ymajorticklabels()
+for lbl in ylbls:
+    text = lbl.get_text()
+    for key in label_colors:
+        if key in text:
+            lbl.set_color(label_colors[key])
+
+plt.show()
+
