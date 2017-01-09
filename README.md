@@ -4,19 +4,19 @@ Skupina ub201617_beta
 # Uvod
 
 Cilj naloge je bil identificirati gene, ki vsebujejo informacije o tem kako se virus razvija med izbruhom,
-opraviti globalno poravnano (global alignment) na izbranih genih in izračunati matriko razdelje urejanja (edit distance).
+opraviti globalno poravnano (global alignment) na izbranih genih in izračunati matriko razdalj med vzorci (edit distance).
 S pomočjo znanih algoritmov gručenja (Hierarchical clustering, Neighbour joining, Multidimensional scaling ...) 
-je bilo potrebno poročati o zanimivih ugotovitvah. Enega od teh algoritmov je bilo potrebno tudi impelemntirati.
+je bilo potrebno poročati o zanimivih ugotovitvah. Enega od teh algoritmov je bilo potrebno tudi implementirati.
 
 # Metode in Rezultati
 
 ## Izračun matrike razdalje urejanja (edit distance)
 
-Na začetku identificiramo gene in njihove velikosti. Ugotovimo da virus Ebole vsebuje 7 genov, 4 geni so krajši (VP24, VP30, VP35 in VP40), 2 srednje velika (GP in NP) ter eden dolg gen (L). Krajši štirje so dolgi približno 1500 bp, srednji približno 2500 do 3000 bp in najdalši približno 7000 bp. 
+Najprej smo identificirali gene in njihove velikosti. Ugotovili smo, da virus Ebole vsebuje 7 genov. Od tega so štirje geni krajši (VP24, VP30, VP35 in VP40), dva srednje velika (GP in NP) in eden daljši (L). Krajši štirje so dolgi približno 1500 bp, srednji približno 2500 do 3000 bp in najdaljši približno 7000 bp. 
 
-Nato naključno izberemo 2 vzorca in na vsakem genu z uporabo dinamičenga programiranja opravimo globalno poravnano (global alignment). Ker nas zanima samo razdelja urejanja (edit distance), ne potrebujemo traceback-a. Ugotovili smo da za izračun enega para genov potrebujemo nekaj minut. Izračuna za najdelši gen nismo mogli izvesti na računalniku s 8GB spomina.
+Nato smo izbrali dva naključna vzorca in na vsakem genu z uporabo dinamičnega programiranja izvedli globalno poravnano (global alignment). Ker nas je zanimala samo razdalja urejanja (edit distance), traceback-a nismo potrebovali. Ugotovili smo, da za izračun poravnave enega para genov potrebujemo nekaj minut. Izračuna za najdaljši gen L nismo mogli izvesti na računalniku z 8GB spomina, saj je tabela dinamičnega programiranja postala prevelika.
 
-Ignorirali smo gen L zaradi omejitve spomina. Za pohitritev izračunov smo uporabili multiprocesiranje. Za izračun celotne matrike je bilo potrebno približno 20 ur. 
+Celotna matrika razdalj, ki se je uporabljala za gručenje, je vsota matrik razdalj za posamezne gene. Zaradi omejitve spomina smo gen L izpustili. Za pohitritev izračunov smo uporabili vzporedno računanje na več procesorskih jedrih. Za izračun celotne matrike razdalj je bilo potrebno približno 20 ur.
 
 ## Hierarhično gručenje
 
