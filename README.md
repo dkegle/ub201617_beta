@@ -18,6 +18,12 @@ Nato smo izbrali dva naključna vzorca in na vsakem genu z uporabo dinamičnega 
 
 Celotna matrika razdalj, ki se je uporabljala za gručenje, je vsota matrik razdalj za posamezne gene. Zaradi omejitve spomina smo gen L izpustili. Za pohitritev izračunov smo uporabili vzporedno računanje na več procesorskih jedrih. Za izračun celotne matrike razdalj je bilo potrebno približno 20 ur.
 
+<!--![](Ebola virus)-->
+
+<a href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/178-EbolaVirusProteins_EbolaProteins.png/1548px-178-EbolaVirusProteins_EbolaProteins.png">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/178-EbolaVirusProteins_EbolaProteins.png/1548px-178-EbolaVirusProteins_EbolaProteins.png" width="600" height="700"/></a>
+
 ## Hierarhično gručenje
 
 Za ocenjevanje podobnosti med različnimi genomi virusa ebole smo uporabili hierarhično gručenje.
